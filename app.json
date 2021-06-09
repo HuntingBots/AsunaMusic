@@ -1,0 +1,45 @@
+{
+    "name": "Asuna Music",
+    "logo": "https://telegra.ph/file/8f77039e12f5242ddd07c.jpg",
+    "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by [Asuna Robot](https://t.me/My_Asuna_Robot).",
+    "keywords": ["music", "voicechat", "telegram"],
+    "repository": "https://github.com/HuntingBots/AsunaMusic",
+    "stack": "container",
+    "env": {
+        "SESSION_NAME": {
+            "description": "Session string (pyrogram)",
+            "required": true
+        },
+        "BOT_TOKEN": {
+            "description": "From @BotFather",
+            "required": true
+        },
+        "BOT_NAME": {
+            "description": "Your VC Play by Matrix VC Bot Name.",
+            "required": false,
+            "value": "@asunahelper"
+       },
+        "API_ID": {
+            "description": "From my.telegram.org/apps",
+            "required": true
+        },
+        "API_HASH": {
+            "description": "From my.telegram.org/apps",
+            "required": true
+        },
+        "SUDO_USERS": {
+            "description": "Full-access users, counted as admin everywhere, seperated by space.",
+            "required": true
+        },
+        "DURATION_LIMIT": {
+            "description": "In minutes!",
+            "required": true,
+            "value": "15"
+        }
+    },
+    "buildpacks": [
+       {
+      "url": "heroku/python"
+       }
+     ]
+  }
