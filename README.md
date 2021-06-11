@@ -1,4 +1,4 @@
-<h1 align="centre">Asuna Music Bot-V3.5 🎶</h1>
+<h1 align="centre">SHEEBA Music MUSIC -V3.5 🎶</h1>
 
 ### A bot that can play music on telegram group's voice call
 
@@ -12,7 +12,7 @@
 
 
 <p align="center">
-  <img src="https://telegra.ph/file/a3b7de7254411cbe33735.jpg">
+  <img src="https://telegra.ph/file/3cef9662e86bd313ec045.jpg">
 </p>
 
 <h2> Whats new 🔥 </h2>
