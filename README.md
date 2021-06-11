@@ -1,4 +1,4 @@
-<h1 align="centre">SHEEBA Music MUSIC -V3.5 🎶</h1>
+<h1 align="centre">SHEEBA MUSIC -V3.5 🎶</h1>
 
 ### A bot that can play music on telegram group's voice call
 
