@@ -1,38 +1,27 @@
-# the logging things
-import logging
+from os import path
 
-from pyrogram import Client as app
-from pyrogram.types import Message
-from youtube_search import YoutubeSearch
+from youtube_dl import YoutubeDL
 
-logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-logger = logging.getLogger(__name__)
+from config import DURATION_LIMIT
+from helpers.errors import DurationLimitError
 
-import pyrogram
+ydl_opts = {
+    "format": "bestaudio/best",
+    "geo-bypass": True,
+    "nocheckcertificate": True,
+    "outtmpl": "downloads/%(id)s.%(ext)s",
+}
+ydl = YoutubeDL(ydl_opts)
 
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
+def download(url: str) -> str:
+    info = ydl.extract_info(url, False)
+    duration = round(info["duration"] / 60)
 
-@app.on_message(pyrogram.filters.command(["search"]))
-async def ytsearch(_, message: Message):
-    try:
-        if len(message.command) < 2:
-            await message.reply_text("/search needs an argument!")
-            return
-        query = message.text.split(None, 1)[1]
-        m = await message.reply_text("Searching....")
-        results = YoutubeSearch(query, max_results=4).to_dict()
-        i = 0
-        text = ""
-        while i < 4:
-            text += f"Title - {results[i]['title']}\n"
-            text += f"Duration - {results[i]['duration']}\n"
-            text += f"Views - {results[i]['views']}\n"
-            text += f"Channel - {results[i]['channel']}\n"
-            text += f"https://youtube.com{results[i]['url_suffix']}\n\n"
-            i += 1
-        await m.edit(text, disable_web_page_preview=True)
-    except Exception as e:
-        await message.reply_text(str(e))
+    if duration > DURATION_LIMIT:
+        raise DurationLimitError(
+            f"Videos longer than {DURATION_LIMIT} minute(s) aren't allowed, the provided video is {duration} minute(s)"
+        )
+
+    ydl.download([url])
+    return path.join("downloads", f"{info['id']}.{info['ext']}")
