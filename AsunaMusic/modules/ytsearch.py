@@ -1,18 +1,10 @@
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
-# the logging things
 import logging
 
-from pyrogram import Client as app
 from pyrogram.types import Message
+from search_engine_parser import GoogleSearch
 from youtube_search import YoutubeSearch
+
+from pyrogram import Client as app, filters
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -22,7 +14,6 @@ logger = logging.getLogger(__name__)
 import pyrogram
 
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
-
 
 @app.on_message(pyrogram.filters.command(["search"]))
 async def ytsearch(_, message: Message):
